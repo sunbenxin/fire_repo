@@ -1,4 +1,3 @@
-
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
 
@@ -49,7 +48,7 @@ if max > 20:
 while (count < max):
     if not result_sort[count]:
         break
-    else:
+    elif result_sort[count][1] > 10:
         data += str(result_sort[count][0]).ljust(100) +  str(result_sort[count][1]) + '\n'
     count += 1
 data += '\n\n\n\n\n'
