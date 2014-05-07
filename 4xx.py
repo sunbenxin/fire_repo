@@ -15,6 +15,11 @@ result = dict()
 for i in range(1):
     min = hours_1_ago + timedelta(minutes = i)
     file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
+    
+    try:
+        open(file)
+    except IOError:
+        break
     for line in open(file).readlines():
         parts = line.split()
         domain = line.split('{')[1].split('|')[0].split('?')[0]

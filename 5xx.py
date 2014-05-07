@@ -16,9 +16,13 @@ for i in range(5):
     min = minutes_5_ago + timedelta(minutes = i)
     file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
     
+    try:
+        open(file)
+    except IOError:
+        break
     for line in open(file).readlines():
         parts = line.split()
-        domain = line.split('{')[1].split('|')[0].split('?')[0]
+        domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
         url = parts[-2].split('?')[0]
         respond_code = int(parts[10]) 
         domain_url = domain + url
@@ -52,7 +56,7 @@ while (count < max):
     if not result_sort[count]:
         pass
     elif result_sort[count][1] > 10:
-        data += str(result_sort[count][0]).ljust(150) +  str(result_sort[count][1]) + '\n'
+        data += str(result_sort[count][0]).ljust(100) +  str(result_sort[count][1]) + '\n'
     count += 1
 
 tcpCliSock.send(data)
