@@ -42,7 +42,7 @@ ADDR = (HOST, PORT)
 tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 count = 0
-data = hostname + ':\n\n'
+data = ""
 
 max = len(result_sort)
 if max > 20:
