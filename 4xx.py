@@ -5,7 +5,7 @@ from datetime import datetime,timedelta
 import socket,smtplib,string
 from socket import *
 
-hostname = gethostname().split('_')[0]
+hostname = gethostname()
 
 
 hours_1_ago = datetime.now() + timedelta(hours= -1)
