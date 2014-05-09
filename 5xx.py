@@ -7,8 +7,8 @@ from socket import *
 
 hostname = gethostname()
 
-
-minutes_5_ago = datetime.now() + timedelta(minutes= -5)
+time_now = datetime.now()
+minutes_5_ago = time_now + timedelta(minutes= -5)
 
 result = dict()
 
@@ -23,7 +23,9 @@ for i in range(5):
     for line in open(file).readlines():
         parts = line.split()
         domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
-        url = parts[-2].split('?')[0]
+        url = parts[-2].split('?')[0].strip()
+        if url.startswith('"'):
+            url = '/'
         respond_code = int(parts[10]) 
         domain_url = domain + url
         if domain == "":
@@ -40,13 +42,12 @@ for i in sorted(result.iteritems(), key = lambda asd:asd[1], reverse = True):
 ##
 HOST = '220.181.167.47'
 PORT = 21567
-BUFSIZE =1024
 ADDR = (HOST, PORT) 
 
 tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 count = 0
-data = ""
+data = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n'
 
 max = len(result_sort)
 if max > 20:
