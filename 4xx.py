@@ -24,6 +24,8 @@ for i in range(60):
         parts = line.split()
         domain = line.split('{')[1].split('|')[0].split('?')[0]
         url = parts[-2].split('?')[0]
+	if url.startswith('"'):
+	    url = '/'
         respond_code = int(parts[10])
         domain_url = domain + url
         if domain == "":
@@ -46,7 +48,7 @@ tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 count = 0
 
-data = ""
+data = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n'
 max = len(result_sort)
 if max > 20:
     max = 20
