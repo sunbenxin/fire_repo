@@ -59,8 +59,9 @@ while (count < max):
     elif result_sort[count][1] > 10:
         data += str(result_sort[count][0]).ljust(100) +  str(result_sort[count][1]) + '\n'
     count += 1
-if  data:
-    data += "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n'
-
-tcpCliSock.send(data)
+if  not data:
+    datas = data
+else:
+    datas = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n' + data
+tcpCliSock.send(datas)
 tcpCliSock.close()
