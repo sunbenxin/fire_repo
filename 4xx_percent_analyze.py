@@ -2,12 +2,14 @@
 #-*- coding: utf-8 -*-
 #
 
-#ha 日志4xx小时统计
+#ha 日志4xx小时统计 错误原因分析脚本
 from datetime import datetime,timedelta
-import socket,smtplib,string
+import socket,smtplib,string,sys
 from socket import *
 
-hostname = gethostname()
+domain_url = sys.argv[1] #str
+time_ago = sys.srgv[2] #ie. 201405091150
+
 
 
 hours_1_ago = datetime.now() + timedelta(hours= -1)
