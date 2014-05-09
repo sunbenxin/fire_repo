@@ -1,6 +1,8 @@
 #!/usr/bin/python
 #-*- coding: utf-8 -*-
+#
 
+#ha 日志4xx小时统计
 from datetime import datetime,timedelta
 import socket,smtplib,string
 from socket import *
@@ -48,7 +50,7 @@ tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 count = 0
 
-data = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n'
+data = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + time_now.strftime("%Y%m%d%H%M") + '\n'
 max = len(result_sort)
 if max > 20:
     max = 20
