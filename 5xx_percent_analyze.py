@@ -26,7 +26,7 @@ for i in range(5):
         break
     for line in open(file).readlines():
         parts = line.split()
-        domain = line.split('{')[1].split('|')[0].split('?')[0]
+        domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
         url = parts[-2].split('?')[0]
 	if url.startswith('"'):
 	    url = '/'
