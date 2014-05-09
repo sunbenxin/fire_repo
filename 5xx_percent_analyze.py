@@ -17,7 +17,7 @@ minutess_5_ago = datetime.strptime(time_ago,"%Y%m%d%H%M")
 result = dict()
 
 for i in range(5):
-    min = hours_1_ago + timedelta(minutes = i)
+    min = minutes_5_ago + timedelta(minutes = i)
     file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
     
     try:
