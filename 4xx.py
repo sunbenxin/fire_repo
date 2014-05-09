@@ -7,8 +7,8 @@ from socket import *
 
 hostname = gethostname()
 
-
-hours_1_ago = datetime.now() + timedelta(hours= -1)
+time_now = datetime.now()
+hours_1_ago = time_now + timedelta(hours= -1)
 
 result = dict()
 
@@ -62,6 +62,6 @@ while (count < max):
 if  not data:
     datas = data
 else:
-    datas = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + (time_now + timedelta(minutes = -1)).strftime("%Y%m%d%H%M") + '\n' + data
+    datas = "分析日志文件时间点：" + hour_1_ago.strftime("%Y%m%d%H%M") + "--" + (time_now + timedelta(minutes = -1)).strftime("%Y%m%d%H%M") + '\n' + data
 tcpCliSock.send(datas)
 tcpCliSock.close()
