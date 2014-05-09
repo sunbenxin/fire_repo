@@ -8,7 +8,7 @@ import socket,smtplib,string,sys
 from socket import *
 
 dst_domain_url = sys.argv[1] #str
-time_ago = sys.srgv[2] #ie. 201405091150
+time_ago = sys.argv[2] #ie. 201405091150
 
 
 
