@@ -11,7 +11,7 @@ dst_domain_url = sys.argv[1] #str
 time_ago = sys.argv[2] #ie. 201405091150
 
 
-hostname = socket.gethostname()
+hostname = gethostname()
 minutes_5_ago = datetime.strptime(time_ago,"%Y%m%d%H%M")
 
 result = dict()
