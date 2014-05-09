@@ -7,12 +7,12 @@ from datetime import datetime,timedelta
 import socket,smtplib,string,sys
 from socket import *
 
-domain_url = sys.argv[1] #str
+dst_domain_url = sys.argv[1] #str
 time_ago = sys.srgv[2] #ie. 201405091150
 
 
 
-hours_1_ago = datetime.now() + timedelta(hours= -1)
+hours_1_ago = datetime.strptime(time_ago,"%Y%m%d%H%M")
 
 result = dict()
 
@@ -32,36 +32,9 @@ for i in range(60):
 	    url = '/'
         respond_code = int(parts[10])
         domain_url = domain + url
-        if domain == "":
-            continue 
-        if 500 > respond_code >= 400:
-            if result.has_key(domain_url):
-                result[domain_url] += 1
+        if domain_url == dst_domain_url and 500 > respond_code >= 400:
+            if result.has_key(str(respond_code)):
+                result[str(respond_code)] += 1
             else:
-                result[domain_url] = 1
-result_sort = list()
-for i in sorted(result.iteritems(), key = lambda asd:asd[1], reverse = True):
-    result_sort.append(i)
-###
-HOST = '220.181.167.47'
-PORT = 21568
-BUFSIZE =1024
-ADDR = (HOST, PORT) 
-#
-tcpCliSock = socket(AF_INET, SOCK_STREAM)
-tcpCliSock.connect(ADDR)
-count = 0
-
-data = "分析日志文件时间点：" + minutes_5_ago.strftime("%Y%m%d%H%M") + "--" + timenow.strftime("%Y%m%d%H%M") + '\n'
-max = len(result_sort)
-if max > 20:
-    max = 20
-while (count < max):
-    if not result_sort[count]:
-        pass
-    elif result_sort[count][1] > 10:
-        data += str(result_sort[count][0]).ljust(100) +  str(result_sort[count][1]) + '\n'
-    count += 1
-
-tcpCliSock.send(data)
-tcpCliSock.close()
+                result[str(respond_code)] = 1
+print result
