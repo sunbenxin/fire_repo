@@ -19,7 +19,7 @@ for i in range(5):
     try:
         open(file)
     except IOError:
-        break
+        continue
     for line in open(file).readlines():
         parts = line.split()
         domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
