@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 from datetime import datetime,timedelta
-import socket,smtplib,string
+import socket,smtplib,string,gzip,os,os.path
 from socket import *
 
 hostname = gethostname()
@@ -17,10 +17,10 @@ for i in range(60):
     file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
     
     try:
-        open(file)
+        g = gzip.GzipFile(fileobj=open(file))
     except IOError:
         break
-    for line in open(file).readlines():
+    for line in g.readlines():
         parts = line.split()
         domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
         url = parts[-2].split('?')[0]
