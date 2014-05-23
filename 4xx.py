@@ -14,7 +14,7 @@ result = dict()
 
 for i in range(60):
     min = hours_1_ago + timedelta(minutes = i)
-    file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
+    file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M") + ".gz"
     
     try:
         g = gzip.GzipFile(fileobj=open(file))
