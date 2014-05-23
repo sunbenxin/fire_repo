@@ -2,7 +2,7 @@
 #-*- coding: utf-8 -*-
 
 from datetime import datetime,timedelta
-import socket,smtplib,string
+import socket,smtplib,string,gzip,os,os.path
 from socket import *
 
 hostname = gethostname()
@@ -14,13 +14,12 @@ result = dict()
 
 for i in range(5):
     min = minutes_5_ago + timedelta(minutes = i)
-    file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M")
-    
+    file = "/home/web_log/haproxy_access/" + min.strftime("%Y%m%d%H") + "/" + hostname +"." + min.strftime("%Y%m%d%H%M") + ".gz"
     try:
-        open(file)
+        g = gzip.GzipFile(fileobj=open(file))
     except IOError:
         continue
-    for line in open(file).readlines():
+    for line in g.readlines():
         parts = line.split()
         try:
             domain = line.split('{')[1].split('|')[0].split('?')[0].split(':')[0]
@@ -65,12 +64,11 @@ PORT = 25
 USER = "jkfunshion"
 PASSWD = "jkmail%"
 FROM = "jkfunshion@funshion.com"
+#TO = ["wsq@funshion.com","OP-GroupSystem@funshion.com"]
 TO = "sunbx@funshion.com"
-#TO = "OP-GroupSystem@funshion.com"
 SUBJECT = "核心域名5分钟5xx统计"
-
 if datas != "":
-    BODY = string.join("From: %s" % FROM, "To: %s" % TO,"SUBJECT: %s" % SUBJECT,"",datas,"\r\n")
+    BODY = string.join(("From: %s" % FROM, "To: %s" % TO,"SUBJECT: %s" % SUBJECT,"",datas),"\r\n")
 else:
     exit()
 smtp = smtplib.SMTP()
