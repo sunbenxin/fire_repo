@@ -70,7 +70,7 @@ TO = "sunbx@funshion.com"
 SUBJECT = "核心域名5分钟5xx统计"
 
 if datas != "":
-    BODY = string.join("From: %s" % FROM, "To: %s" % TO,"SUBJECT: %s" % SUBJECT,"",datas),"\r\n")
+    BODY = string.join("From: %s" % FROM, "To: %s" % TO,"SUBJECT: %s" % SUBJECT,"",datas,"\r\n")
 else:
     exit()
 smtp = smtplib.SMTP()
